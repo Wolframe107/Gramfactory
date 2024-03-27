@@ -1,4 +1,4 @@
-## gramfactory
+## Gramfactory
 
 Gramfactory is a Python script designed to generate autostereograms, commonly known as stereograms.
 
