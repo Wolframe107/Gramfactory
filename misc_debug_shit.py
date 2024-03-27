@@ -1,5 +1,5 @@
 
-# FÖR ATT SKAPA EN MASK OCH DET
+""" # FÖR ATT SKAPA EN MASK OCH DET
 foreground = Image.open("star.png").convert("RGBA")  # Convert to grayscale
 background = Image.open("test_bak.jpg").convert("RGBA")
 # Resize the foreground image to match the background image size
@@ -10,7 +10,7 @@ background = background.crop((0, int(background.height/2 - foreground.height / 2
 # Create a new image with the same size as the background and fill it with white
 result.paste(background, (0, 0), mask=foreground)
 # Save the resulting image
-result.show()
+result.show() """
 
 """ 
 #background.show()
@@ -75,3 +75,17 @@ for i in range(7):
     width * (i+9) - 15
     background.paste(temp_background, (width  * (i+9) - 15, int(height/2 - temp_background.height/2)), mask=result_mask)
 background.show() """
+
+"""     # Paste unto background
+    debug_background = Image.new("RGBA", (result.size), (255, 255, 255, 100))
+    for i in range(col_num - left_slice):
+        # debug_background.paste(temp_background, (width  * (i - 1 + left_column + 1) - offset * (num + 1), int(height/2 - temp_background.height/2)), mask=result_mask)
+        result.paste(
+            temp_background,
+            (
+                width * (i - 1 + left_slice + 1) - offset * (slice + 1),
+                int(height / 2 - temp_background.height / 2),
+            ),
+            mask=result_mask,
+        )
+    #debug_background.show() """
