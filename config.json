@@ -1,0 +1,7 @@
+{
+    "num_of_columns": 13,
+    "num_of_slices": 4,
+    "offset": 15,
+    "background_location": "Backgrounds/ny_bak.jpg",
+    "mask_location": "Masks/star.png"
+}
