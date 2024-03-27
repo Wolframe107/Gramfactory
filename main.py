@@ -15,20 +15,6 @@ def main():
     background_location = config.get("background_location")
     mask_location = config.get("mask_location")
 
-    # Set up background
-    pattern = Image.open(background_location)
-    width = pattern.width
-    height = pattern.height
-
-    # Set up mask and scale according to number of slices
-    mask = Image.open(mask_location)
-    new_height = int((num_of_slices * width * mask.height) / mask.width)
-    mask = mask.resize(((num_of_slices) * width, new_height))
-
-    if mask.height > height:
-        print("num_of_slices is too high")
-        exit()
-
     def pasteMask(slice):
         # Create transparent mask in shape of background slice
         mask_size = (
@@ -43,10 +29,10 @@ def main():
         result_mask.paste(mask_cropped, (0, 0))
 
         # Keep track of left most slice + a little voodoo to make mask centered
-        if(num_of_slices % 2 == 0):
-            left_slice = int(num_of_columns / 2) + slice - int(num_of_slices/2) + 1
+        if num_of_slices % 2 == 0:
+            left_slice = int(num_of_columns / 2) + slice - int(num_of_slices / 2) + 1
         else:
-            left_slice = int(num_of_columns / 2) + slice - int(num_of_slices/2)
+            left_slice = int(num_of_columns / 2) + slice - int(num_of_slices / 2)
 
         # Crop background to fit the mask
         temp_background = result.crop(
@@ -68,6 +54,20 @@ def main():
                 ),
                 mask=result_mask,
             )
+
+    # Set up background
+    pattern = Image.open(background_location)
+    width = pattern.width
+    height = pattern.height
+
+    # Set up mask and scale according to number of slices
+    mask = Image.open(mask_location)
+    new_height = int((num_of_slices * width * mask.height) / mask.width)
+    mask = mask.resize(((num_of_slices) * width, new_height))
+
+    if mask.height > height:
+        print("num_of_slices is too high")
+        exit()
 
     result = Image.new(mode="RGB", size=(width * num_of_columns, height), color=0)
     for i in range(num_of_columns):

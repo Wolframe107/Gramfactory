@@ -4,7 +4,7 @@ Gramfactory is a Python script designed to generate autostereograms, commonly kn
 
 ### How to Use
 
-Configuration settings are adjusted within the `config.json` file. Simply select your desired background and mask, then execute `main.py`. Choose from the provided images in "Backgrounds" or "Masks," or craft your own. It's crucial to note that the mask must be in PNG format and utilize transparency for optimal results.
+Configuration settings are adjusted within the `config.json` file. Simply select your desired background and mask, then execute `main.py`. Choose from the provided images in "Backgrounds" and "Masks," or craft your own. It's crucial to note that the mask must be in PNG format and utilize transparency for optimal results.
 
 ### Understanding Configuration Variables
 
