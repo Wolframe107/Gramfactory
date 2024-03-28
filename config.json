@@ -1,7 +1,9 @@
 {
     "num_of_columns": 13,
-    "num_of_slices": 4,
+    "num_of_slices": 5,
     "offset": 15,
     "background_location": "Backgrounds/ny_bak.jpg",
-    "mask_location": "Masks/star.png"
+    "mask_location": "Masks/star.png",
+    "save_image": false,
+    "video_mode": false
 }
