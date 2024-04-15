@@ -1,6 +1,7 @@
 ## Gramfactory
 
 Gramfactory is a Python script designed to generate autostereograms, commonly known as stereograms.
+![Example Image](example.png?raw=true "Example Image - Should show a star")
 
 ### How to Use
 
@@ -14,7 +15,7 @@ Configuration settings are adjusted within the `config.json` file. Simply select
 
 ### Understanding Configuration Variables
 
-- **num_of_columns**: Determines how many times the background slice repeats. Recommended values: 10-15
+- **num_of_columns**: If anything other than a specified number, determines how many times the background pattern repeats. Else, tries to make final picture around 1920 pixels wide.
   
 - **num_of_slices**: Specifies the number of slices over which the mask stretches, influencing its scale. Recommended values: 2-5
   
