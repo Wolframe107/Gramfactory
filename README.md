@@ -1,7 +1,7 @@
 ## Gramfactory
 
 Gramfactory is a Python script designed to generate autostereograms, commonly known as stereograms.
-![Example Image](example.png?raw=true "Example Image - Should show a star")
+![Example Image](example.png?raw=true "Example Image - Should show one or multiple stars")
 
 ### How to Use
 
