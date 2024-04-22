@@ -2,7 +2,7 @@ from PIL import Image
 
 
 def run(settings):
-    def apply_mask_slice(slice, mask, result, bg_width, bg_height):
+    def apply_mask_slice(slice, mask, result, width, height, num_of_columns):
         # Create transparent mask in shape of background slice
         mask_size = (
             (mask.width * slice) / num_of_slices,
@@ -12,8 +12,11 @@ def run(settings):
         )
 
         mask_cropped = mask.crop(mask_size)
-        result_mask = Image.new("RGBA", (bg_width, mask.height), (255, 255, 255, 0))
+        result_mask = Image.new("RGBA", (width, mask.height), (255, 255, 255, 0))
         result_mask.paste(mask_cropped, (0, 0))
+
+        new_height = int((num_of_slices * width * mask.height) / mask.width)
+        mask = mask.resize(((num_of_slices) * width, new_height))
 
         # Keep track of left most slice + a little voodoo to make mask centered
         if num_of_slices % 2 == 0:
@@ -24,10 +27,10 @@ def run(settings):
         # Crop background to fit the mask
         temp_background = result.crop(
             (
-                left_slice * bg_width - (offset * slice),
-                int(bg_height / 2 - result_mask.height / 2),
-                (left_slice + 1) * bg_width - (offset * slice),
-                int(bg_height / 2 + result_mask.height / 2),
+                left_slice * width - (offset * slice),
+                int(height / 2 - result_mask.height / 2),
+                (left_slice + 1) * width - (offset * slice),
+                int(height / 2 + result_mask.height / 2),
             )
         )
 
@@ -36,8 +39,8 @@ def run(settings):
             result.paste(
                 temp_background,
                 (
-                    bg_width * (i - 1 + left_slice + 1) - offset * (slice + 1),
-                    int(bg_height / 2 - temp_background.height / 2),
+                    width * (i - 1 + left_slice + 1) - offset * (slice + 1),
+                    int(height / 2 - temp_background.height / 2),
                 ),
                 mask=result_mask,
             )
@@ -49,6 +52,11 @@ def run(settings):
         height = pattern.height
 
         # Scale mask according to number of slices
+        if settings["num_of_columns"] == "Auto":
+            num_of_columns = round((1920 * (height / 1080)) / width)
+        else:
+            num_of_columns = settings["num_of_columns"]
+
         new_height = int((num_of_slices * width * mask.height) / mask.width)
         mask = mask.resize(((num_of_slices) * width, new_height))
 
@@ -61,7 +69,7 @@ def run(settings):
             result.paste(pattern, (i * pattern.width, 0))
 
         for i in range(num_of_slices):
-            apply_mask_slice(i, mask, result, width, height)
+            apply_mask_slice(i, mask, result, width, height, num_of_columns)
 
         return result
 
